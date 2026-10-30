@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pedidos Express</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="top">
+      <p class="eyebrow">LocalStack · us-east-1</p>
+      <h1>Pedidos Express</h1>
+      <p class="lede">
+        Um pedido sai do navegador, passa pelo API Gateway, é gravado e só depois a fila chama a Lambda que confirma ou recusa.
+      </p>
+    </header>
+
+    <main>
+      <section class="panel" aria-labelledby="form-title">
+        <h2 id="form-title">Novo pedido</h2>
+        <form id="order-form">
+          <label>
+            API
+            <input id="api-base" name="apiBase" autocomplete="off" spellcheck="false" required />
+          </label>
+          <label>
+            Cliente
+            <input id="customer-name" name="customerName" value="Ana" required />
+          </label>
+          <div class="row">
+            <label>
+              SKU
+              <input id="sku" name="sku" value="CADERNO" required />
+            </label>
+            <label>
+              Qtd
+              <input id="qty" name="qty" type="number" min="0" step="1" value="2" required />
+            </label>
+            <label>
+              Preço (R$)
+              <input id="price" name="price" type="number" min="0" step="0.01" value="15.00" required />
+            </label>
+          </div>
+          <p id="form-error" class="error" role="alert" hidden></p>
+          <div class="actions">
+            <button type="submit">Enviar pedido</button>
+            <button type="button" id="fill-ok" class="ghost">Preencher R$ 30</button>
+            <button type="button" id="fill-over" class="ghost">Preencher R$ 600</button>
+          </div>
+        </form>
+        <p class="hint">Total acima de R$ 500,00 ou quantidade 0 chega na fila e volta <strong>REJECTED</strong>.</p>
+      </section>
+
+      <section class="panel" aria-labelledby="path-title">
+        <div class="panel-head">
+          <h2 id="path-title">Caminho</h2>
+          <p id="status-pill" class="pill">aguardando</p>
+        </div>
+        <p class="hint">Clique em uma etapa para ver o comando daquela fase.</p>
+        <ol id="path" class="path"></ol>
+        <article id="lesson" class="lesson" aria-live="polite">
+          <h3 id="lesson-title"></h3>
+          <p id="lesson-text"></p>
+          <div id="lesson-blocks"></div>
+        </article>
+      </section>
+    </main>
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
